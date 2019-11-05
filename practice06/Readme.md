@@ -35,6 +35,8 @@
 ### **FPGA 동작 사진 (3개- 일반, Q1, Q2)**
 
 `Please fill up your source`
+2019/10/29일 실습 test_bench clean버전
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/clean%EB%AA%A8%EB%93%9C.PNG)
 
 2019/10/29일 실습 wave  사진
 ![](https://github.com/jiseon0702/logic_design/blob/master/practice06/segment.PNG)
