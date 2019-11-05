@@ -18,31 +18,57 @@
 
 ## 퀴즈 ### 아래 코드 일부를 수정하여 다음을 구하시오
 
-```verilog wire  [41:0] six_digit_seg; assign       six_digit_seg = { 4{7'b0000000}, seg_left, seg_right } ``` 
+```verilog
+wire  [41:0] six_digit_seg;
+assign       six_digit_seg = { 4{7'b0000000}, seg_left, seg_right } ;
+``` 
 
 > Q1 - 고정 LED (왼쪽 4개) AAAA 출력 : `AA_AA_00`, `AA_AA_01`, `AA_AA_02`, … 순으로 LED 변경
 
-`Please fill up your source`
+
+```verilog
+wire  [41:0] six_digit_seg;
+asgin six_digit_seg= { 4{7'b1110111}, seg_left, seg_right};
+```
+으로 수정
+
+
 
 > Q2 - 고정 LED 없이 2개의 LED 단위로 1초 Counter 값 표시 : `00_00_00`, `01_01_01`, `02_02_02`, … 순으로 LED 변경
 
-`Please fill up your source`
+```verilog
+wire  [41:0] six_digit_seg;
+asgin six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right};
+```
+으로 수정
+
 
 ## 결과 ### **Top Module 의 DUT/TestBench Code 및 Waveform 검증**
 
-`Please fill up your source`
-
-### **FPGA 동작 사진 (3개- 일반, Q1, Q2)**
-
-`Please fill up your source`
-2019/10/29일 실습 test_bench clean버전
+## 2019/10/29일 실습 test_bench clean버전
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/clean%EB%AA%A8%EB%93%9C.PNG)
 
-2019/10/29일 실습 wave  사진
+## 2019/10/29일 실습 wave  사진
 ![](https://github.com/jiseon0702/logic_design/blob/master/practice06/segment.PNG)
 
 사진에대한설명
 > segment/o_seg_enb이 마지막 2비트에서 0이나오면  그때의 o_seg의 값이 0000000이아닌값이 나오는데  o_seg_enb의 마지막두비트에서 0이안나오고 다른 비트에서 0이나온다면  o_seg 은 default의값인 0000000이 나온다.
+
+
+### **FPGA 동작 사진 (3개- 일반, Q1, Q2)**
+## 일반
+
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_181942.jpg)
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_182038.jpg)
+
+## Q1
+
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183307.jpg)
+
+## Q2
+
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183545.jpg)
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183548.jpg)
 
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTg2NDQzMDI5MF19
