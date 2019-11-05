@@ -58,13 +58,15 @@ asgin six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_
 ### **FPGA 동작 사진 (3개- 일반, Q1, Q2)**
 ## 일반
 
->![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_181942.jpg)
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_181942.jpg)
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_182038.jpg)
 
-##Q1
+## Q1
+
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183307.jpg)
 
-##Q2
+## Q2
+
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183545.jpg)
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183548.jpg)
 
