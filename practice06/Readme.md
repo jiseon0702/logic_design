@@ -18,18 +18,29 @@
 
 ## 퀴즈 ### 아래 코드 일부를 수정하여 다음을 구하시오
 
-```verilog wire  [41:0] six_digit_seg; assign       six_digit_seg = { 4{7'b0000000}, seg_left, seg_right } ``` 
+```verilog
+wire  [41:0] six_digit_seg;
+assign       six_digit_seg = { 4{7'b0000000}, seg_left, seg_right } 
+``` 
 
 > Q1 - 고정 LED (왼쪽 4개) AAAA 출력 : `AA_AA_00`, `AA_AA_01`, `AA_AA_02`, … 순으로 LED 변경
 
 
-six_digit_seg= { 4{7'b1110111}, seg_left, seg_right} ... 으로 수정
+```verilog
+wire  [41:0] six_digit_seg;
+six_digit_seg= { 4{7'b1110111}, seg_left, seg_right}
+```
+으로 수정
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183307.jpg)
 
 
 > Q2 - 고정 LED 없이 2개의 LED 단위로 1초 Counter 값 표시 : `00_00_00`, `01_01_01`, `02_02_02`, … 순으로 LED 변경
 
-six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right} ,,, 으로 수정
+```verilog
+wire  [41:0] six_digit_seg;
+six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right}
+```
+으로 수정
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183545.jpg)
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183548.jpg)
 
@@ -42,10 +53,10 @@ six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right}
 
 
 `Please fill up your source`
-2019/10/29일 실습 test_bench clean버전
+## 2019/10/29일 실습 test_bench clean버전
 ![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/clean%EB%AA%A8%EB%93%9C.PNG)
 
-2019/10/29일 실습 wave  사진
+## 2019/10/29일 실습 wave  사진
 ![](https://github.com/jiseon0702/logic_design/blob/master/practice06/segment.PNG)
 
 사진에대한설명
