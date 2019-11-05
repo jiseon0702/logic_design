@@ -22,17 +22,24 @@
 
 > Q1 - 고정 LED (왼쪽 4개) AAAA 출력 : `AA_AA_00`, `AA_AA_01`, `AA_AA_02`, … 순으로 LED 변경
 
-`Please fill up your source`
+
+six_digit_seg= { 4{7'b1110111}, seg_left, seg_right} ... 으로 수정
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183307.jpg)
+
 
 > Q2 - 고정 LED 없이 2개의 LED 단위로 1초 Counter 값 표시 : `00_00_00`, `01_01_01`, `02_02_02`, … 순으로 LED 변경
 
-`Please fill up your source`
+six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right} ,,, 으로 수정
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183545.jpg)
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183548.jpg)
 
 ## 결과 ### **Top Module 의 DUT/TestBench Code 및 Waveform 검증**
 
-`Please fill up your source`
 
-### **FPGA 동작 사진 (3개- 일반, Q1, Q2)**
+### **FPGA 동작 사진 (practice 07 실습 사진)**
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_181942.jpg)
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_182038.jpg)
+
 
 `Please fill up your source`
 2019/10/29일 실습 test_bench clean버전
