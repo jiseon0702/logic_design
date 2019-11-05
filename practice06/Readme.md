@@ -63,7 +63,7 @@ asgin six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_
 
 ## Q1
 
-![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183307.jpg)
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/KakaoTalk_20191106_004635795.jpg)
 
 ## Q2
 
