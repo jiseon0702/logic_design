@@ -20,7 +20,7 @@
 
 ```verilog
 wire  [41:0] six_digit_seg;
-assign       six_digit_seg = { 4{7'b0000000}, seg_left, seg_right } 
+assign       six_digit_seg = { 4{7'b0000000}, seg_left, seg_right } ;
 ``` 
 
 > Q1 - 고정 LED (왼쪽 4개) AAAA 출력 : `AA_AA_00`, `AA_AA_01`, `AA_AA_02`, … 순으로 LED 변경
@@ -28,7 +28,7 @@ assign       six_digit_seg = { 4{7'b0000000}, seg_left, seg_right }
 
 ```verilog
 wire  [41:0] six_digit_seg;
-asgin six_digit_seg= { 4{7'b1110111}, seg_left, seg_right}
+asgin six_digit_seg= { 4{7'b1110111}, seg_left, seg_right};
 ```
 으로 수정
 
@@ -38,7 +38,7 @@ asgin six_digit_seg= { 4{7'b1110111}, seg_left, seg_right}
 
 ```verilog
 wire  [41:0] six_digit_seg;
-asgin six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right}
+asgin six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right};
 ```
 으로 수정
 
@@ -63,7 +63,7 @@ asgin six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_
 
 ## Q1
 
-![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/20191105_183307.jpg)
+![](https://github.com/jiseon0702/logic_design/blob/master/%EC%82%AC%EC%A7%84/KakaoTalk_20191106_004635795.jpg)
 
 ## Q2
 
