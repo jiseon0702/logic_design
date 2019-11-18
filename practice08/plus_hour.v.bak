@@ -366,7 +366,6 @@ always @(*) begin
 					o_sec_clk = 1'b0;
 					o_min_clk = ~sw2;
 					o_hour_clk = 1'b0;
-
 				end
 			endcase
 		end
