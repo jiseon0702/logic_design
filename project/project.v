@@ -162,6 +162,7 @@ reg	[5:0]	o_seg_enb		;
 
 always @(cnt_common_node) begin
 	if ( i_mode == 2'b00 ) begin
+		reg	[5:0]	o_seg_enb		;
 		case (cnt_common_node)	
 			4'd0:	o_seg_enb = 6'b111110;
 			4'd1:	o_seg_enb = 6'b111101;
@@ -177,7 +178,7 @@ end
 reg	[5:0] o_seg_enb		;
 	
 always @(posedge blink_clk ) begin
-	if ( i_mode == 2'b01 || i_mode == 2'b10 ) begin
+	if ( i_mode == 2'b01 or i_mode == 2'b10 ) begin
 			case (cnt_common_node)	
 					4'd0:	o_seg_enb = 6'b111110;
 					4'd1:	o_seg_enb = 6'b111101;

@@ -1,0 +1,241 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vbuzz
+Z0 !s110 1574236374
+!i10b 1
+!s100 _cl;H_4CV@69f3WVdkmdR1
+I`U>:TUOKz_ZlX?7ZV;zab0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/dlwlt/Desktop/git/logic_design/project
+Z3 w1574236373
+Z4 8C:\Users\dlwlt\Desktop\dp.v
+Z5 FC:\Users\dlwlt\Desktop\dp.v
+L0 711
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1574236374.000000
+Z8 !s107 C:\Users\dlwlt\Desktop\dp.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:\Users\dlwlt\Desktop\dp.v|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vcontroller
+R0
+!i10b 1
+!s100 A3@jnVc7RekRG0IfE0Y@:3
+I>YK>2U]Tkz2G2;;XCVY;:3
+R1
+R2
+R3
+R4
+R5
+L0 348
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vdebounce
+R0
+!i10b 1
+!s100 b]Ufc^YnB@I_D3CfnH;^52
+IeJ[E85Unmhh3NkeX`]Goa1
+R1
+R2
+R3
+R4
+R5
+L0 322
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vdouble_fig_sep
+R0
+!i10b 1
+!s100 25maffV_:o1eK=d@JMh9c3
+Il`S0=n11FihTko=oCA5VL0
+R1
+R2
+R3
+R4
+R5
+L0 86
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vfnd_dec
+R0
+!i10b 1
+!s100 3SEmc5=l9=lWi33e:AoOh2
+IeH`ne6@iUYBVWz<0Nb37Z3
+R1
+R2
+R3
+R4
+R5
+L0 55
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vhms_cnt
+R0
+!i10b 1
+!s100 2B<HLJADA?I[e5e8DDO5`1
+Ib9bdJZ>Pj>Te_Hn8[N6JJ2
+R1
+R2
+R3
+R4
+R5
+L0 289
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vled_disp
+R0
+!i10b 1
+!s100 fYJE3TJ9QK1g_@RdIlf<@1
+IaAiL;>[BGcjY6X9cfT<I00
+R1
+R2
+R3
+R4
+R5
+L0 104
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vminsec
+R0
+!i10b 1
+!s100 YHQ>4`0V3_E5Z7<9@TcZ23
+I>:<LJJMbKKQE6SOj`QeJ;1
+R1
+R2
+R3
+R4
+R5
+L0 564
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vnco
+R0
+!i10b 1
+!s100 <=A3<6l3:=LS>L^nk^HV^3
+INzdSB0fSjBCUE^MW<EBKf3
+R1
+R2
+R3
+R4
+R5
+L0 21
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vseg_dp
+R0
+!i10b 1
+!s100 nYDF2^CPJL:Ff@3=JU84I3
+I]XLFX=^6Y8;aoHoh780;l1
+R1
+R2
+R3
+R4
+R5
+L0 261
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vtop
+R0
+!i10b 1
+!s100 fen0A6@n[GfmGj95Q4b:g3
+IRbd@^PW<iVA7La?Wkc<<T3
+R1
+R2
+R3
+R4
+R5
+L0 793
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
