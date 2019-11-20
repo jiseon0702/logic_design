@@ -155,9 +155,6 @@ always @(posedge gen_clk or negedge rst_n) begin
 end
 
 
-
-
-
 reg	[5:0]	o_seg_enb		;
 
 always @(i_mode == 2'b00) begin
@@ -305,17 +302,66 @@ endmodule
 module seg_dp ( 
 		i_mode,
 		i_position,
-		o_seg_dp_num);
+		o_seg_dp_num,
+		clk,
+		rst_n);
 
 output	[5:0]	o_seg_dp_num;
 
 input	[1:0]	i_mode		;
 input	[1:0]	i_position	;
+input		clk		;
+input		rst_n		;
+
+wire 		blink_clk	;
+
+nco		blink_nco (
+		.o_gen_clk	( blink_clk	),
+		.i_nco_num	(32'd5000000	),
+		.clk		(clk		),
+		.rst_n		(rst_n		));
+
 
 
 reg 	[5:0]	o_seg_dp_num	;
 
-always @(i_mode == 2'b10 or i_mode == 2'b01) begin
+always @( i_mode == 2'b00 ) begin
+
+	case (i_position)
+		4'd0:	o_seg_dp_num = 6'b000_000;
+		4'd1:	o_seg_dp_num = 6'b000_000;
+		4'd2:	o_seg_dp_num = 6'b000_000;
+		default:o_seg_dp_num = 6'b000_000; // 0 display
+	endcase
+end
+
+always @( posedge blink_clk && (i_mode == 2'b01) ) begin
+
+	case (i_position)
+		4'd0:	o_seg_dp_num = 6'b000_000;
+		4'd1:	o_seg_dp_num = 6'b000_000;
+		4'd2:	o_seg_dp_num = 6'b000_000;
+		default:o_seg_dp_num = 6'b000_000; // 0 display
+	endcase
+end
+always @( posedge blink_clk && (i_mode == 2'b10) ) begin
+
+	case (i_position)
+		4'd0:	o_seg_dp_num = 6'b000_000;
+		4'd1:	o_seg_dp_num = 6'b000_000;
+		4'd2:	o_seg_dp_num = 6'b000_000;
+		default:o_seg_dp_num = 6'b000_000; // 0 display
+	endcase
+end
+
+always @(negedge blink_clk && (i_mode == 2'b01) ) begin
+	case (i_position)
+		4'd0:	o_seg_dp_num = 6'b000_011;
+		4'd1:	o_seg_dp_num = 6'b001_100;
+		4'd2:	o_seg_dp_num = 6'b110_000;
+		default:o_seg_dp_num = 6'b000_000; // 0 display
+	endcase
+always @(negedge blink_clk && (i_mode == 2'b10)) begin
 	case (i_position)
 		4'd0:	o_seg_dp_num = 6'b000_011;
 		4'd1:	o_seg_dp_num = 6'b001_100;
@@ -393,6 +439,7 @@ module	controller(
 		o_mode,
 		o_position,
 		o_alarm_en,
+		o_am_pm_en,
 		o_sec_clk,
 		o_min_clk,
 		o_hour_clk,
@@ -412,6 +459,7 @@ module	controller(
 output	[1:0]	o_mode			;
 output	[1:0]	o_position	;
 output		o_alarm_en		;
+output		o_am_pm_en		;
 output		o_sec_clk		;
 output		o_min_clk		;
 output		o_hour_clk		;
@@ -503,6 +551,15 @@ always @(posedge sw3 or negedge rst_n) begin		//sw3=>Turn on/off Alarm
 		o_alarm_en <= 1'b0;
 	end else begin
 		o_alarm_en <= o_alarm_en + 1'b1;
+	end
+end
+
+reg	o_am_pm_en;
+always @(negedge rst_n or ((i_mode == 2'b00 ) && posedge sw3) ) begin		// sw3 => Turn on/off am,pm mode
+	if (rst_n == 1'b0) begin
+		o_am_pm_en <= 1'b0;
+	end else begin
+		o_am_pm_en <= o_am_pm_en + 1'b1;
 	end
 end
 
@@ -634,7 +691,7 @@ output		o_max_hit_hour	;
 output		o_alarm		;
 
 input	[1:0]	i_mode		;
-input		i_position	;
+input	[1:0]	i_position	;
 input		i_sec_clk	;
 input		i_min_clk	;
 input		i_hour_clk	;
@@ -642,6 +699,7 @@ input		i_alarm_sec_clk	;
 input		i_alarm_min_clk	;
 input		i_alarm_hour_clk;
 input		i_alarm_en	;
+input		i_am_pm_en	;
 
 input		clk		;
 input		rst_n		;
@@ -865,6 +923,7 @@ wire		i_max_hit_sec	;
 wire		i_max_hit_hour	;
 
 wire		o_alarm_en	;
+wire		o_am_pm_en	;
 wire		o_alarm_hour_clk;
 wire		o_alarm_min_clk	;
 wire		o_alarm_sec_clk	;
@@ -876,130 +935,129 @@ wire	[1:0]	o_position	;
 
 
 controller	u_controller(
-				.o_mode(o_mode)			,
-				.o_position(o_position)		,
-				.o_alarm_en(o_alarm_en)		,
-				.o_sec_clk(o_sec_clk)		,
-				.o_min_clk(o_min_clk)		,
-				.o_hour_clk(o_hour_clk)		,
-				.o_alarm_sec_clk(o_alarm_sec_clk),
-				.o_alarm_min_clk(o_alarm_min_clk),
-				.o_alarm_hour_clk(o_alarm_hour_clk),
-				.i_max_hit_sec(i_max_hit_sec)	,
-				.i_max_hit_min(i_max_hit_min)	,
-				.i_max_hit_hour(i_max_hit_hour)	,
-				.i_sw0(i_sw0)			,
-				.i_sw1(i_sw1)			,
-				.i_sw2(i_sw2)			,
-				.i_sw3(i_sw3)			,
-				.clk(clk)			,
-				.rst_n(rst_n)			);
+				.o_mode			(o_mode			),
+				.o_position		(o_position		),
+				.o_alarm_en		(o_alarm_en		),
+				.o_am_pm_en		(o_am_pm_en		),
+				.o_sec_clk		(o_sec_clk		),
+				.o_min_clk		(o_min_clk		),
+				.o_hour_clk		(o_hour_clk		),
+				.o_alarm_sec_clk	(o_alarm_sec_clk	),
+				.o_alarm_min_clk	(o_alarm_min_clk	),
+				.o_alarm_hour_clk	(o_alarm_hour_clk	),
+				.i_max_hit_sec		(i_max_hit_sec		),
+				.i_max_hit_min		(i_max_hit_min		),
+				.i_max_hit_hour		(i_max_hit_hour		),
+				.i_sw0			(i_sw0			),
+				.i_sw1			(i_sw1			),
+				.i_sw2			(i_sw2			),
+				.i_sw3			(i_sw3			),
+				.clk			(clk			),
+				.rst_n			(rst_n			));
 
-wire	[5:0]	o_min;
-wire	[5:0]	o_sec;
-wire	[5:0]	o_hour;
+wire	[5:0]	o_min		;
+wire	[5:0]	o_sec		;
+wire	[5:0]	o_hour		;
 
-wire		out_alarm;
+wire		out_alarm	;
 minsec		u_minsec(	
-				.o_sec(o_sec)			,
-				.o_min(o_min)			,
-				.o_hour(o_hour)			,
-				.o_max_hit_sec(i_max_hit_sec)	,
-				.o_max_hit_min(i_max_hit_min)	,
-				.o_max_hit_hour(i_max_hit_hour)	,
-				.o_alarm(out_alarm)		,	
-				.i_mode(o_mode)			,
-				.i_position(o_position)		,
-				.i_sec_clk(o_sec_clk)		,
-				.i_min_clk(o_min_clk)		,
-				.i_hour_clk(o_hour_clk)		,
-				.i_alarm_sec_clk(o_alarm_sec_clk),
-				.i_alarm_min_clk(o_alarm_min_clk),
-				.i_alarm_hour_clk(o_alarm_hour_clk),
-				.i_alarm_en(o_alarm_en)		,
-				.clk(clk)			,
-				.rst_n(rst_n)			);
+				.o_sec			(o_sec			),
+				.o_min			(o_min			),
+				.o_hour			(o_hour			),
+				.o_max_hit_sec		(i_max_hit_sec		),
+				.o_max_hit_min		(i_max_hit_min		),
+				.o_max_hit_hour		(i_max_hit_hour		),
+				.o_alarm		(out_alarm		),	
+				.i_mode			(o_mode			),
+				.i_position		(o_position		),
+				.i_sec_clk		(o_sec_clk		),
+				.i_min_clk		(o_min_clk		),
+				.i_hour_clk		(o_hour_clk		),
+				.i_alarm_sec_clk	(o_alarm_sec_clk	),
+				.i_alarm_min_clk	(o_alarm_min_clk	),
+				.i_alarm_hour_clk	(o_alarm_hour_clk	),
+				.i_alarm_en		(o_alarm_en		),
+				.clk			(clk			),
+				.rst_n			(rst_n			));
 		
 
 
-wire	[3:0]	o_left0;
-wire	[3:0]	o_right0;
-wire	[3:0]	o_left1;
-wire	[3:0]	o_right1;
-wire	[3:0]	o_left2;
-wire	[3:0]	o_right2;
+wire	[3:0]	o_left0		;
+wire	[3:0]	o_right0	;
+wire	[3:0]	o_left1		;
+wire	[3:0]	o_right1	;
+wire	[3:0]	o_left2		;
+wire	[3:0]	o_right2	;
 
-double_fig_sep	u0_dfs(		.o_left	(o_left0)	,
-				.o_right(o_right0)	,
-				.i_double_fig(o_sec)	);
+double_fig_sep	u0_dfs(		.o_left	(o_left0	),
+				.o_right(o_right0	),
+				.i_double_fig(o_sec	));
 
-double_fig_sep	u1_dfs(		.o_left(o_left1)	,
-				.o_right(o_right1)	,
-				.i_double_fig(o_min)	);
+double_fig_sep	u1_dfs(		.o_left	(o_left1	),
+				.o_right(o_right1	),
+				.i_double_fig(o_min	));
 
-double_fig_sep	u2_dfs(		.o_left(o_left2)	,
-				.o_right(o_right2)	,
-				.i_double_fig(o_hour)	);
-
-
-
-wire	[6:0]	o_seg0;
-wire	[6:0]	o_seg1;
-wire	[6:0]	o_seg2;
-wire	[6:0]	o_seg3;
-wire	[6:0]	o_seg4;
-wire	[6:0]	o_seg5;
+double_fig_sep	u2_dfs(		.o_left	(o_left2	),
+				.o_right(o_right2	),
+				.i_double_fig(o_hour	));
 
 
-fnd_dec		u0_fnd_dec( 	.o_seg(o_seg0)		,
-				.i_num(o_left0)		);
 
-fnd_dec		u1_fnd_dec( 	.o_seg(o_seg1)		,
-				.i_num(o_right0)	);
+wire	[6:0]	o_seg0		;
+wire	[6:0]	o_seg1		;
+wire	[6:0]	o_seg2		;
+wire	[6:0]	o_seg3		;
+wire	[6:0]	o_seg4		;
+wire	[6:0]	o_seg5		;
 
-fnd_dec		u2_fnd_dec( 	.o_seg(o_seg2)	,
-				.i_num(o_left1)		);
 
-fnd_dec		u3_fnd_dec( 	.o_seg(o_seg3)	,
-				.i_num(o_right1)	);
+fnd_dec		u0_fnd_dec( 	.o_seg		(o_seg0		),
+				.i_num		(o_left0	));
 
-fnd_dec		u4_fnd_dec( 	.o_seg(o_seg4)	,
-				.i_num(o_left2)	);
+fnd_dec		u1_fnd_dec( 	.o_seg		(o_seg1		),
+				.i_num		(o_right0	));
 
-fnd_dec		u5_fnd_dec( 	.o_seg(o_seg5)	,
-				.i_num(o_right2)	);
+fnd_dec		u2_fnd_dec( 	.o_seg		(o_seg2		),
+				.i_num		(o_left1	));
+
+fnd_dec		u3_fnd_dec( 	.o_seg		(o_seg3		),
+				.i_num		(o_right1	));
+
+fnd_dec		u4_fnd_dec( 	.o_seg		(o_seg4		),
+				.i_num		(o_left2	));
+
+fnd_dec		u5_fnd_dec( 	.o_seg		(o_seg5		),
+				.i_num		(o_right2	));
 
 
 
 wire	[5:0] o_seg_dp_num	;
 
 seg_dp		u0_seg_dp ( 
-				.i_position(o_position		),
-				.i_mode(o_mode			),
-				.o_seg_dp_num(o_seg_dp_num	));
+				.i_position	(o_position		),
+				.i_mode		(o_mode			),
+				.o_seg_dp_num	(o_seg_dp_num		),
+				.clk		(clk			),
+				.rst_n		(rst_n			));
 
 
 wire	[41:0]	six_digit_seg;
 assign		six_digit_seg = {o_seg4, o_seg5, o_seg2, o_seg3,o_seg0, o_seg1};
-led_disp	u_led_disp(	.o_seg(o_seg)			,
-				.o_seg_dp(o_seg_dp)		,
-				.o_seg_enb(o_seg_enb)		,
-				.i_six_digit_seg(six_digit_seg)	,
-				.i_six_dp(o_seg_dp_num)		,
-				.i_mode(o_mode)			,
-				.i_position(o_position)		,
-				.clk(clk)			,
-				.rst_n(rst_n)			);
+led_disp	u_led_disp(	.o_seg		(o_seg			),
+				.o_seg_dp	(o_seg_dp		),
+				.o_seg_enb	(o_seg_enb		),
+				.i_six_digit_seg(six_digit_seg	),
+				.i_six_dp	(o_seg_dp_num		),
+				.i_mode		(o_mode			),
+				.i_position	(o_position		),
+				.clk		(clk			),
+				.rst_n		(rst_n			));
 
 buzz		u_buzz(
-			.o_buzz(o_alarm)	,
-			.i_buzz_en(out_alarm)	,
-			.clk(clk)		,
-			.rst_n(rst_n)		);
-
-
-
-
+				.o_buzz			(o_alarm	),
+				.i_buzz_en		(out_alarm	),
+				.clk			(clk		),
+				.rst_n			(rst_n		));
 
 
 
