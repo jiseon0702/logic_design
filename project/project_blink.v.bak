@@ -224,11 +224,7 @@ always @(posedge blink_clk && (i_mode == 2'b01 ) && ( i_mode == 2'b10 ) ) begin
 		end
 	end
 
-end
-
 end	
-
-
 		
 reg		o_seg_dp		;
 

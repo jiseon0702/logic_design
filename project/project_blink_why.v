@@ -98,6 +98,91 @@ assign		o_right	= i_double_fig % 10	;	//???
 
 endmodule
 
+module mode_position(
+			i_mode,
+			i_position,
+			o_mode_position);
+
+output	[2:0] o_mode_position ;
+input	[2:0] i_mode	;
+input	[1:0] i_position	;
+
+
+reg 	sel_mode;
+
+always @(i_mode ) begin
+	if (i_mode == 2'b00 ) begin
+		sel_mode <= 1'b0;
+	end else begin
+	if (i_mode == 2'b01 ) begin
+		sel_mode <= 1'b1;
+	end else begin
+	if (i_mode == 2'b10 ) begin
+		sel_mode <= 1'b1;
+			end
+		end
+	end
+
+end
+
+wire	[2:0]	o_mode_position	;
+assign		o_mode_position = {sel_mode, i_position};
+
+endmodule
+
+module seg_enb	(
+		i_mode_position,
+		clk,
+		rst_n,
+		o_seg_enb_type
+		);
+
+output	[2:0]	o_seg_enb_type	;
+
+input	[2:0]	i_mode_position	;
+input		clk			;
+input		rst_n			;
+
+wire		blink_clk	;
+
+nco		blink_nco (
+		.o_gen_clk	( blink_clk	),
+		.i_nco_num	(32'd5000000	),
+		.clk		(clk		),
+		.rst_n		(rst_n		));
+
+
+reg cnt_common_node	;
+
+always @(posedge blink_clk or negedge rst_n) begin
+	if( rst_n == 1'b0) begin
+		cnt_common_node <= 1'b0;
+	end else begin
+		cnt_common_node <= ~cnt_common_node	;
+	end
+end
+
+
+wire	[3:0]	i_mode_position_case;
+assign		i_mode_position_case = {cnt_common_node, i_mode_position};
+
+reg	[2:0] o_seg_enb_type	;
+
+
+always @(i_mode_position_case) begin
+	case ( i_mode_position_case)
+		4'b1100 : o_seg_enb_type = 3'b001;
+		4'b1101 : o_seg_enb_type = 3'b010;
+		4'b1110 : o_seg_enb_type = 3'b100;
+		default: o_seg_enb_type = 3'b000;
+
+	endcase
+end
+
+endmodule
+
+		
+
 //	--------------------------------------------------
 //	0~59 --> 2 Separated Segments
 //	--------------------------------------------------
@@ -107,10 +192,9 @@ module	led_disp(
 		o_seg_enb,
 		i_six_digit_seg,
 		i_six_dp,
-		i_mode,
-		i_position,
 		clk,
-		rst_n);
+		rst_n,
+		i_seg_enb);
 
 output	[5:0]	o_seg_enb		;
 output		o_seg_dp		;
@@ -118,14 +202,14 @@ output	[6:0]	o_seg			;
 
 input	[41:0]	i_six_digit_seg		;
 input	[5:0]	i_six_dp		;
-input	[1:0]	i_mode			;
-input	[1:0]	i_position		;
+input	[2:0]	i_seg_enb	;
+
 
 input		clk			;
 input		rst_n			;
 
 wire		gen_clk		;
-wire		blink_clk	;
+
 
 nco		u_nco(
 		.o_gen_clk	( gen_clk	),
@@ -133,11 +217,6 @@ nco		u_nco(
 		.clk		( clk		),
 		.rst_n		( rst_n		));
 
-nco		blink_nco (
-		.o_gen_clk	( blink_clk	),
-		.i_nco_num	(32'd5000000	),
-		.clk		(clk		),
-		.rst_n		(rst_n		));
 
 
 reg	[3:0]	cnt_common_node	;
@@ -160,7 +239,8 @@ end
 
 reg	[5:0]	o_seg_enb		;
 
-always @(i_mode == 2'b00) begin
+always @(cnt_common_node) begin
+	if(i_seg_enb == 3'b000 ) begin
 		case (cnt_common_node)	
 			4'd0:	o_seg_enb = 6'b111110;
 			4'd1:	o_seg_enb = 6'b111101;
@@ -170,26 +250,8 @@ always @(i_mode == 2'b00) begin
 			4'd5:	o_seg_enb = 6'b011111;
 			default:o_seg_enb = 6'b111111;
 		endcase	
-end
-
-	
-always @(negedge blink_clk ) begin
-		case (cnt_common_node)	
-			4'd0:	o_seg_enb = 6'b111110;
-			4'd1:	o_seg_enb = 6'b111101;
-			4'd2:	o_seg_enb = 6'b111011;
-			4'd3:	o_seg_enb = 6'b110111;
-			4'd4:	o_seg_enb = 6'b101111;
-			4'd5:	o_seg_enb = 6'b011111;
-			default:o_seg_enb = 6'b111111;
-		endcase	
-
-
-
-end
-
-always @(posedge blink_clk && (i_mode == 2'b01 ) && ( i_mode == 2'b10 ) ) begin
-	if (i_position == 2'b00 ) begin
+	end else begin
+	if(i_seg_enb == 3'b001 ) begin
 		case ( cnt_common_node)
 			4'd0:	o_seg_enb = 6'b111111;
 			4'd1:	o_seg_enb = 6'b111111;
@@ -200,7 +262,7 @@ always @(posedge blink_clk && (i_mode == 2'b01 ) && ( i_mode == 2'b10 ) ) begin
 			default:o_seg_enb = 6'b111111;
 		endcase	
 	end else begin
-	if (i_position == 2'b01 ) begin
+	if(i_seg_enb == 3'b010) begin
 		case ( cnt_common_node)
 			4'd0:	o_seg_enb = 6'b111110;
 			4'd1:	o_seg_enb = 6'b111101;
@@ -210,8 +272,8 @@ always @(posedge blink_clk && (i_mode == 2'b01 ) && ( i_mode == 2'b10 ) ) begin
 			4'd5:	o_seg_enb = 6'b011111;
 			default:o_seg_enb = 6'b111111;
 		endcase	
-	end else begin
-	if (i_position == 2'b10 ) begin
+
+	if(i_seg_enb == 3'b100 ) begin
 		case ( cnt_common_node)
 			4'd0:	o_seg_enb = 6'b111110;
 			4'd1:	o_seg_enb = 6'b111101;
@@ -221,12 +283,16 @@ always @(posedge blink_clk && (i_mode == 2'b01 ) && ( i_mode == 2'b10 ) ) begin
 			4'd5:	o_seg_enb = 6'b111111;
 			default:o_seg_enb = 6'b111111;
 		endcase	
-		end
 	end
 
 end
+end
+end
+end
 
-end	
+
+
+
 
 
 		
@@ -858,6 +924,14 @@ controller	u_controller(
 				.clk(clk)			,
 				.rst_n(rst_n)			);
 
+
+wire	[3:0]	o_mode_position	;
+
+mode_position	u_mode_position(
+				.i_mode			(o_mode			),
+				.i_position		(o_position		),
+				.o_mode_position	(o_mode_position	));
+
 wire	[5:0]	o_min;
 wire	[5:0]	o_sec;
 wire	[5:0]	o_hour;
@@ -941,6 +1015,14 @@ seg_dp		u0_seg_dp (
 				.i_mode(o_mode			),
 				.o_seg_dp_num(o_seg_dp_num	));
 
+wire	[2:0]	i_seg_enb	;
+
+seg_enb		u0_seg_enb	(
+				.i_mode_position(o_mode_position),
+				.clk		(clk		),
+				.rst_n		(rst_n		),
+				.o_seg_enb_type	(i_seg_enb	));
+			
 
 wire	[41:0]	six_digit_seg;
 assign		six_digit_seg = {o_seg4, o_seg5, o_seg2, o_seg3,o_seg0, o_seg1};
@@ -949,8 +1031,7 @@ led_disp	u_led_disp(	.o_seg(o_seg)			,
 				.o_seg_enb(o_seg_enb)		,
 				.i_six_digit_seg(six_digit_seg)	,
 				.i_six_dp(o_seg_dp_num)		,
-				.i_mode(o_mode)			,
-				.i_position(o_position)		,
+				.i_seg_enb(i_seg_enb),
 				.clk(clk)			,
 				.rst_n(rst_n)			);
 
