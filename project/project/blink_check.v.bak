@@ -348,37 +348,32 @@ wire	[3:0]	i_mode_position	;
 assign		i_mode_position = {i_mode,i_position};
 
 always @(i_mode_position ) begin
-		if ( i_mode_position == 4'b0100) begin
+		if ( i_mode_position == 4'b0100)
 			o_seg_dp_num <= 6'b000_011;
 		end else begin
 	
-		if ( i_mode_position == 4'b0101) begin
+		if ( i_mode_position == 4'b0101)
 			o_seg_dp_num <= 6'b001_100;
 		end else begin
 		
-		if ( i_mode_position == 4'b0110) begin
+		if ( i_mode_position == 4'b0110)
 			o_seg_dp_num <= 6'b110_000;
 		end else begin
-		if ( i_mode_position == 4'b1000) begin
+		if ( i_mode_position == 4'b1000)
 			o_seg_dp_num <= 6'b000_011;
 		end else begin
 	
-		if ( i_mode_position == 4'b1001) begin
+		if ( i_mode_position == 4'b1001)
 			o_seg_dp_num <= 6'b001_100;
 		end else begin
 		
-		if ( i_mode_position == 4'b1010) begin
+		if ( i_mode_position == 4'b1010)
 			o_seg_dp_num <= 6'b110_000;
 		end else begin
 			o_seg_dp_num <= 6'b000_000;
 		end
-		end
-		end
-	end
-	end
 	end
 
-end
 
 
 

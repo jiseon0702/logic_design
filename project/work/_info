@@ -9,37 +9,37 @@ z2
 cModel Technology
 dC:/intelFPGA/18.1
 vbuzz
-Z0 !s110 1574236374
+Z0 !s110 1574574258
 !i10b 1
-!s100 _cl;H_4CV@69f3WVdkmdR1
-I`U>:TUOKz_ZlX?7ZV;zab0
+!s100 L6hzhnPEe`eT<H58Qf8450
+IgDI^]?GXm:]mC@d6;97kO3
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 Z2 dC:/Users/dlwlt/Desktop/git/logic_design/project
-Z3 w1574236373
-Z4 8C:\Users\dlwlt\Desktop\dp.v
-Z5 FC:\Users\dlwlt\Desktop\dp.v
-L0 711
+Z3 w1574574257
+Z4 8C:/Users/dlwlt/Desktop/git/logic_design/project/project/blink_check.v
+Z5 FC:/Users/dlwlt/Desktop/git/logic_design/project/project/blink_check.v
+L0 830
 Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1574236374.000000
-Z8 !s107 C:\Users\dlwlt\Desktop\dp.v|
-Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:\Users\dlwlt\Desktop\dp.v|
+Z7 !s108 1574574258.000000
+Z8 !s107 C:/Users/dlwlt/Desktop/git/logic_design/project/project/blink_check.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/dlwlt/Desktop/git/logic_design/project/project/blink_check.v|
 !i113 1
 Z10 o-work work
 Z11 tCvgOpt 0
 vcontroller
 R0
 !i10b 1
-!s100 A3@jnVc7RekRG0IfE0Y@:3
-I>YK>2U]Tkz2G2;;XCVY;:3
+!s100 eAO=h6JdjS[>;jgd:0n2H2
+I26VQoBPnZK]2X`DeXMOIh1
 R1
 R2
 R3
 R4
 R5
-L0 348
+L0 467
 R6
 r1
 !s85 0
@@ -53,14 +53,14 @@ R11
 vdebounce
 R0
 !i10b 1
-!s100 b]Ufc^YnB@I_D3CfnH;^52
-IeJ[E85Unmhh3NkeX`]Goa1
+!s100 gZVm>^ki::dFOPbcE^YFn2
+I?<<cOOGdOT@aeXS>_VjeU2
 R1
 R2
 R3
 R4
 R5
-L0 322
+L0 441
 R6
 r1
 !s85 0
@@ -75,7 +75,7 @@ vdouble_fig_sep
 R0
 !i10b 1
 !s100 25maffV_:o1eK=d@JMh9c3
-Il`S0=n11FihTko=oCA5VL0
+I:78Y[S4O[JZZ9a@=MKFCK0
 R1
 R2
 R3
@@ -96,7 +96,7 @@ vfnd_dec
 R0
 !i10b 1
 !s100 3SEmc5=l9=lWi33e:AoOh2
-IeH`ne6@iUYBVWz<0Nb37Z3
+IX7Qn>:i]3HB3k4E?oWWkg1
 R1
 R2
 R3
@@ -116,14 +116,14 @@ R11
 vhms_cnt
 R0
 !i10b 1
-!s100 2B<HLJADA?I[e5e8DDO5`1
-Ib9bdJZ>Pj>Te_Hn8[N6JJ2
+!s100 k@JK^2KH7`9i7S02JQHgb1
+IRERR^;BGJBZR3a3I;YgU:3
 R1
 R2
 R3
 R4
 R5
-L0 289
+L0 408
 R6
 r1
 !s85 0
@@ -137,14 +137,14 @@ R11
 vled_disp
 R0
 !i10b 1
-!s100 fYJE3TJ9QK1g_@RdIlf<@1
-IaAiL;>[BGcjY6X9cfT<I00
+!s100 k7_Ml0X6f<_N2_0a<kEzO0
+I2T[5>=ccOBR>6W0=QJT`<0
 R1
 R2
 R3
 R4
 R5
-L0 104
+L0 189
 R6
 r1
 !s85 0
@@ -158,14 +158,35 @@ R11
 vminsec
 R0
 !i10b 1
-!s100 YHQ>4`0V3_E5Z7<9@TcZ23
-I>:<LJJMbKKQE6SOj`QeJ;1
+!s100 VDK``>[V5IWOfLg[T4b572
+I5k27RZo4i<<TB;L^AA`>n1
 R1
 R2
 R3
 R4
 R5
-L0 564
+L0 683
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vmode_position
+R0
+!i10b 1
+!s100 6mJiWh:k1^i;fQGO<leO[2
+I^XAFk<WXfPQYz`9BGWlQk0
+R1
+R2
+R3
+R4
+R5
+L0 101
 R6
 r1
 !s85 0
@@ -180,7 +201,7 @@ vnco
 R0
 !i10b 1
 !s100 <=A3<6l3:=LS>L^nk^HV^3
-INzdSB0fSjBCUE^MW<EBKf3
+IX[D:`];8;Od8^i17:?YBS2
 R1
 R2
 R3
@@ -200,14 +221,35 @@ R11
 vseg_dp
 R0
 !i10b 1
-!s100 nYDF2^CPJL:Ff@3=JU84I3
-I]XLFX=^6Y8;aoHoh780;l1
+!s100 6L97j7H1VdgX:8mn::;YR0
+IzJ[BMo<EeYhLhFF>YJ2jm1
 R1
 R2
 R3
 R4
 R5
-L0 261
+L0 334
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vseg_enb
+R0
+!i10b 1
+!s100 CGi_aXgh;Uob=4EA?0ele0
+ID2EZ5TbFf9T:In>]LOMXg2
+R1
+R2
+R3
+R4
+R5
+L0 133
 R6
 r1
 !s85 0
@@ -221,14 +263,14 @@ R11
 vtop
 R0
 !i10b 1
-!s100 fen0A6@n[GfmGj95Q4b:g3
-IRbd@^PW<iVA7La?Wkc<<T3
+!s100 RlFQKc3DA]L9naWSEZVlF2
+I[A]`BAWhaMV`dG6X=:I_H1
 R1
 R2
 R3
 R4
 R5
-L0 793
+L0 912
 R6
 r1
 !s85 0

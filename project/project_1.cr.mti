@@ -15,4 +15,23 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	top
 
+} {} {}} C:/Users/dlwlt/Desktop/git/logic_design/project/project/blink_check.v {1 {vlog -work work -stats=none C:/Users/dlwlt/Desktop/git/logic_design/project/project/blink_check.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module nco
+-- Compiling module fnd_dec
+-- Compiling module double_fig_sep
+-- Compiling module mode_position
+-- Compiling module seg_enb
+-- Compiling module led_disp
+-- Compiling module seg_dp
+-- Compiling module hms_cnt
+-- Compiling module debounce
+-- Compiling module controller
+-- Compiling module minsec
+-- Compiling module buzz
+-- Compiling module top
+
+Top level modules:
+	top
+
 } {} {}}
